@@ -28,6 +28,8 @@ if (!fs.existsSync(DATA_DIR)) {
 
 const MESSAGES_ADMIN1_FILE = path.join(DATA_DIR, 'messages_admin1.json');
 const MESSAGES_ADMIN2_FILE = path.join(DATA_DIR, 'messages_admin2.json');
+const MESSAGES_FILE = path.join(DATA_DIR, 'messages.json');
+
 
 if (!fs.existsSync(MESSAGES_ADMIN1_FILE)) {
   fs.writeFileSync(MESSAGES_ADMIN1_FILE, JSON.stringify([], null, 2));
@@ -116,10 +118,6 @@ if (!fs.existsSync(PRESENCE_FILE)) {
   }, null, 2));
 }
 
-const MESSAGES_FILE = path.join(DATA_DIR, 'messages.json');
-if (!fs.existsSync(MESSAGES_FILE)) {
-  fs.writeFileSync(MESSAGES_FILE, JSON.stringify([], null, 2));
-}
 
 if (!fs.existsSync(CREDENTIALS_FILE)) {
   fs.writeFileSync(CREDENTIALS_FILE, JSON.stringify({
