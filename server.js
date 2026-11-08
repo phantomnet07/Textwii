@@ -30,11 +30,9 @@ const MESSAGES_ADMIN1_FILE = path.join(DATA_DIR, 'messages_admin1.json');
 const MESSAGES_ADMIN2_FILE = path.join(DATA_DIR, 'messages_admin2.json');
 const MESSAGES_FILE = path.join(DATA_DIR, 'messages.json');
 
-
 if (!fs.existsSync(MESSAGES_ADMIN1_FILE)) {
   fs.writeFileSync(MESSAGES_ADMIN1_FILE, JSON.stringify([], null, 2));
 }
-
 if (!fs.existsSync(MESSAGES_ADMIN2_FILE)) {
   fs.writeFileSync(MESSAGES_ADMIN2_FILE, JSON.stringify([], null, 2));
 }
@@ -117,7 +115,6 @@ if (!fs.existsSync(PRESENCE_FILE)) {
     user2: { lastSeen: Date.now(), online: false }
   }, null, 2));
 }
-
 
 if (!fs.existsSync(CREDENTIALS_FILE)) {
   fs.writeFileSync(CREDENTIALS_FILE, JSON.stringify({
@@ -493,16 +490,13 @@ wss.on('connection', (ws) => {
   }));
 });
 
-server.listen(PORT, () => {
-  console.log(`Server running smoothly on port ${PORT}`);
-});
 
 app.get('/api/stickers', (req, res) => {
   res.json(loadJson(STICKERS_FILE, []));
 });
 
 app.post('/api/stickers', (req, res) => {
-const stks = loadJson(STICKERS_FILE, []);
+  const stks = loadJson(STICKERS_FILE, []);
   const newStk = req.body.sticker || { id: 'stk_' + Date.now(), data: req.body.stickerData };
   if (!stks.some(s => s.id === newStk.id)) {
     stks.unshift(newStk);
@@ -902,9 +896,6 @@ function broadcast(data, excludeWs = null) {
   });
 }
 
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
 
 if (!fs.existsSync(CREDENTIALS_FILE)) {
   fs.writeFileSync(CREDENTIALS_FILE, JSON.stringify({
@@ -1002,7 +993,7 @@ app.post('/api/auth/login', (req, res) => {
       name: creds.admin1.name,
       partnerName: creds.admin2.name,
       avatar: getAvatarDataUri('admin1'),
-partnerAvatar: getAvatarDataUri('admin2')
+      partnerAvatar: getAvatarDataUri('admin2')
     });
   } else if (passcode === creds.admin2.pass) {
     return res.json({
