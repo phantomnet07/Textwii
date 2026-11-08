@@ -21,12 +21,18 @@ const wss = new WebSocket.Server({ server });
 
 const PORT = process.env.PORT || 3000;
 const DATA_DIR = path.join(__dirname, 'data');
+
+if (!fs.existsSync(DATA_DIR)) {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+}
+
 const MESSAGES_ADMIN1_FILE = path.join(DATA_DIR, 'messages_admin1.json');
 const MESSAGES_ADMIN2_FILE = path.join(DATA_DIR, 'messages_admin2.json');
 
 if (!fs.existsSync(MESSAGES_ADMIN1_FILE)) {
   fs.writeFileSync(MESSAGES_ADMIN1_FILE, JSON.stringify([], null, 2));
 }
+
 if (!fs.existsSync(MESSAGES_ADMIN2_FILE)) {
   fs.writeFileSync(MESSAGES_ADMIN2_FILE, JSON.stringify([], null, 2));
 }
