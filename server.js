@@ -693,9 +693,7 @@ wss.on('connection', (ws) => {
   }));
 });
 
-server.listen(PORT, () => {
-  console.log(`Server running smoothly on port ${PORT}`);
-});
+
 
 app.get('/api/stickers', (req, res) => {
   res.json(loadJson(STICKERS_FILE, []));
